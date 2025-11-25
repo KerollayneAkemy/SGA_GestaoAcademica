@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", carregarMeusCursos);
 
-// CARREGAR CURSOS MATRICULADOS
+// CARREGA CURSOS MATRICULADOS
 async function carregarMeusCursos() {
+  //onde os cards serão inseridos.
   const lista = document.getElementById("lista-disciplinas");
 
-  // Verificar sessão
+  // se esta logado
   const { data: { session } } = await supabase.auth.getSession();
 
   if (!session) {
@@ -12,6 +13,7 @@ async function carregarMeusCursos() {
     return;
   }
 
+  //Pegando o ID do aluno
   const userId = session.user.id;
 
   // Buscar matrículas + dados completos do curso
@@ -28,6 +30,8 @@ async function carregarMeusCursos() {
         usuarios:professor_id ( nome )
       )
     `)
+
+    //id aluno igual userId
     .eq("aluno_id", userId);
 
   if (error) {
@@ -42,17 +46,18 @@ async function carregarMeusCursos() {
     return;
   }
 
+  //Se deu tudo certo, chama as disciplinas
   renderDisciplinas(matriculas);
 }
 
-// RENDERIZAR DISCIPLINAS (CARDS)
-function renderDisciplinas(matriculas) {
+function renderDisciplinas(matriculas) { //cria os cards
   const lista = document.getElementById("lista-disciplinas");
-  lista.innerHTML = "";
+  lista.innerHTML = ""; //Remove cursos antigos e add novos
 
   matriculas.forEach((m) => {
     const c = m.curso;
 
+//Cria o card:
     const card = document.createElement("div");
     card.classList.add("card-disciplina");
 
@@ -103,11 +108,12 @@ window.abrirDetalhes = async function (cursoId) {
   professorModal.textContent = curso.usuarios?.nome ?? "—";
   cargaModal.textContent = curso.duracao;
   turmaModal.textContent = "—"; // SEM TURMA
-  planoModal.innerHTML = curso.descricao.replace(/\n/g, "<br>");
+  planoModal.innerHTML = curso.descricao.replace(/\n/g, "<br>"); //troca quebras de linha por <br> para manter o formato do texto
 
   modal.style.display = "flex";
 };
 
+//Botão para voltar ao painel do aluno
 document.getElementById("btn-ir-painel").addEventListener("click", () => {
     window.location.href = "painel-aluno.html";
 });

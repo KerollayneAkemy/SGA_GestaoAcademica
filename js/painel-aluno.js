@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-  // AUTENTICAÇÃO
+// Autenticação e checagem de permissão
   const user = await checkAuthAndRole('aluno', 'login.html');
   if (!user) return;
 
-  // CAPTURAR ELEMENTOS — COM VERIFICAÇÃO
+  // captura elementos do htnml
     const elNomePerfil = document.getElementById('nome-perfil-aluno');
   const elMatriculaPerfil = document.getElementById('matricula-perfil-aluno');
   const elNomeCompleto = document.getElementById('nome-aluno-completo');
@@ -12,12 +12,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const elCursoAluno = document.getElementById('curso-aluno');
   const tbodyNotas = document.querySelector('#tabela-notas tbody');
 
+  //verifica se tudo existe
   if (!elNomePerfil || !elMatriculaPerfil || !elNomeCompleto || !elMatriculaCompleto || !tbodyNotas) {
     console.error("❌ ERRO: Elementos do HTML não encontrados. Verifique os IDs do painel do aluno.");
     return;
   }
 
-  //  BUSCAR DADOS DO ALUNO
+  //  buscando dados do aluno no supabase
   const { data: alunoData, error: alunoErr } = await supabase
     .from('usuarios')
     .select('nome, email')
@@ -30,16 +31,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
+// se tiver o nomme no banco busca o nome, se não pega o email antes do @
   const nomeCompleto = alunoData?.nome ?? user.email.split('@')[0];
   const primeiroNome = nomeCompleto.split(' ')[0];
 
-  // Preencher UI
+  // Preenche os dados na tela
   elNomePerfil.innerText = primeiroNome;
   elMatriculaPerfil.innerText = user.id.slice(0, 8) + '...';
   elNomeCompleto.innerText = nomeCompleto;
   elMatriculaCompleto.innerText = user.id;
 
-  // BUSCAR CURSO DO ALUNO — SELECT CORRIGIDO (SEM ERRO 406)
+  // BUSCAR CURSO DO ALUNO
   const { data: matriculaCurso, error: matErr } = await supabase
     .from('matriculas')
     .select(`
@@ -49,6 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     .eq('aluno_id', user.id)
     .single();
 
+    //se n achar
   if (matErr || !matriculaCurso) {
     tbodyNotas.innerHTML = '<tr><td colspan="4">Nenhuma nota encontrada.</td></tr>';
     if (elCursoAluno) elCursoAluno.innerText = 'Não vinculado';
@@ -62,8 +65,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // FUNÇÃO PARA CARREGAR NOTAS
   async function carregarNotas() {
-    tbodyNotas.innerHTML = '';
+    tbodyNotas.innerHTML = ''; //limpando a tabela
 
+    //consukta no supabase
     const { data: notas, error: notasErr } = await supabase
       .from('notas')
       .select('*')
@@ -71,17 +75,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       .eq('curso_id', cursoId)
       .order('data', { ascending: false });
 
+      //erro na consulta
     if (notasErr) {
       console.error('Erro ao carregar notas:', notasErr);
       tbodyNotas.innerHTML = '<tr><td colspan="4">Erro ao carregar notas.</td></tr>';
       return;
     }
 
+    //n tem notas
     if (!notas || notas.length === 0) {
       tbodyNotas.innerHTML = '<tr><td colspan="4">Nenhuma nota lançada.</td></tr>';
       return;
     }
 
+    // preenche a linha da tabela com dados.
     for (const n of notas) {
       const tr = document.createElement('tr');
       tr.innerHTML = `
@@ -94,10 +101,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Carrega imediatamente
+
   carregarNotas();
 
-  // REALTIME — 100% FUNCIONAL
+  // atualização automatica das notas
   try {
     const channel = supabase
       .channel(`public:notas:aluno:${user.id}`)
@@ -119,6 +126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       )
       .subscribe();
 
+      // remove o canal ao sair da página
     window.addEventListener('beforeunload', () => {
       try { supabase.removeChannel(channel); } catch {}
     });
@@ -132,11 +140,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const menuPerfil = document.getElementById("menu-aluno");
 
   if (btnPerfil && menuPerfil) {
+     //quando clica no botão do perfil
     btnPerfil.addEventListener("click", (e) => {
       e.stopPropagation();
       menuPerfil.classList.toggle("ativo");
     });
 
+    //quando clica fora do menu, fecha ele
     document.addEventListener("click", () => {
       menuPerfil.classList.remove("ativo");
     });
