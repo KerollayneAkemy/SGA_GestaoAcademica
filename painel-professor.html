@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Professor - SGA</title>
+    <link rel="stylesheet" href="css/painel-admin.css" />
+    <script src="js/auth.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">SGA</div>
+      <nav>
+        <a href="home.html">Home</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <a
+          href="#"
+          onclick="logout(); window.location.href='login.html';"
+          class="btn-login"
+          >Sair</a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <section class="painel-container">
+        <div class="painel-card">
+          <h2 id="welcomeMessage">Painel do Professor</h2>
+          <p>Gerencie suas disciplinas e alunos</p>
+        </div>
+
+        <div class="painel-card tabela-card">
+          <h3>Minhas Disciplinas</h3>
+          <table class="tabela-painel">
+            <thead>
+              <tr>
+                <th>Disciplina</th>
+                <th>Turma</th>
+                <th>Alunos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Engenharia de Software</td>
+                <td>ES-2024-1</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>Banco de Dados</td>
+                <td>BD-2024-1</td>
+                <td>30</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Sistema de Gestão Acadêmica. Todos os direitos reservados.
+      </p>
+    </footer>
+
+    <script>
+      if (!isLoggedIn()) {
+        window.location.href = "login.html";
+      } else {
+        const user = getCurrentUser();
+        if (user.type !== "professor") {
+          window.location.href = "login.html";
+        } else {
+          document.getElementById(
+            "welcomeMessage"
+          ).textContent = `Bem-vindo, ${user.name}!`;
+        }
+      }
+    </script>
+  </body>
+</html>
