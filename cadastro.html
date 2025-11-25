@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - SGA</title>
     <link rel="stylesheet" href="css/cadastro.css">
+    <script src="js/auth.js"></script>
 </head>
 <body>
 
@@ -36,6 +37,7 @@
                 <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required>
                 
                 <button type="submit">Cadastrar</button>
+                <div id="cadastroMessage" style="margin-top: 10px; display: none;"></div>
             </form>
             
             <p class="redirect-text">
@@ -49,5 +51,24 @@
     <p>&copy; 2025 Sistema de Gestão Acadêmica — Todos os direitos reservados.</p>
 </footer>
 
+<script>
+document.getElementById('form-cadastro').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+    
+    if (register(nome, email, senha)) {
+        document.getElementById('cadastroMessage').innerHTML = '<span style="color: green;">Cadastro realizado com sucesso!</span>';
+        document.getElementById('cadastroMessage').style.display = 'block';
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 2000);
+    } else {
+        document.getElementById('cadastroMessage').innerHTML = '<span style="color: red;">Email já cadastrado!</span>';
+        document.getElementById('cadastroMessage').style.display = 'block';
+    }
+});
+</script>
 </body>
 </html>

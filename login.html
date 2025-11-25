@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - SGA</title>
   <link rel="stylesheet" href="css/login.css">
+  <script src="js/auth.js"></script>
 </head>
 <body>
 
@@ -24,15 +25,11 @@
     <section class="login-container">
     <div class="login-card">
       <h2>Login</h2>
-      <form action="painel-aluno.html" method="get"> 
-
-          <input type="email" placeholder="E-mail" required>
-          <input type="password" placeholder="Senha" required>
-          <button type="submit">Entrar como Aluno</button>
-        </form>
-
-        <form action="painel-admin.html" method="get" style="margin-top: 15px;">
-          <button type="submit">Entrar como Administrador</button>
+      <form id="loginForm"> 
+          <input type="email" id="email" placeholder="E-mail" required>
+          <input type="password" id="password" placeholder="Senha" required>
+          <button type="submit">Entrar</button>
+          <div id="loginError" style="color: red; margin-top: 10px; display: none;">Email ou senha incorretos</div>
         </form>
             <p>Não possui conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
   </section>
@@ -42,5 +39,25 @@
   <p>&copy; 2025 Sistema de Gestão Acadêmica. Todos os direitos reservados.</p>
 </footer>
 
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const userType = login(email, password);
+    
+    if (userType) {
+        if (userType === 'aluno') {
+            window.location.href = 'painel-aluno.html';
+        } else if (userType === 'admin') {
+            window.location.href = 'painel-admin.html';
+        } else if (userType === 'professor') {
+            window.location.href = 'painel-professor.html';
+        }
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+    }
+});
+</script>
 </body>
 </html>
