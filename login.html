@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - SGA</title>
-  <link rel="stylesheet" href="css/login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SGA</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
-
-<header>
-  <div class="logo">SGA</div>
-  <nav>   
-    <a href="home.html">Home</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="sobre.html">Sobre</a>
-    <a href="contato.html">Contato</a>
-    <a href="login.html" class="btn-login active">Login</a>
-  </nav>
+    <header>
+    <div class="logo">SGA</div>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <a href="login.html" class="btn-login">Login</a>
+    </nav>
 </header>
 
-<main>  
-    <section class="login-container">
-    <div class="login-card">
-      <h2>Login</h2>
-      <form action="painel-aluno.html" method="get"> 
+    <form class="login-form" id="loginForm">
+        <h2>Entrar</h2>
 
-          <input type="email" placeholder="E-mail" required>
-          <input type="password" placeholder="Senha" required>
-          <button type="submit">Entrar como Aluno</button>
-        </form>
+        <input type="email" id="email" placeholder="E-mail" required>
+        <input type="password" id="senha" placeholder="Senha" required>
 
-        <form action="painel-admin.html" method="get" style="margin-top: 15px;">
-          <button type="submit">Entrar como Administrador</button>
-        </form>
-            <p>Não possui conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
-  </section>
-</main>
+        <button type="submit" id="btnEntrar">Entrar</button>
+        <a href="cadastro.html" class="btn-cadastrar">Criar conta</a>
 
-<footer>
-  <p>&copy; 2025 Sistema de Gestão Acadêmica. Todos os direitos reservados.</p>
+    </form>
+
+        <footer>
+    <p>&copy; 2025 Sistema de Gestão Acadêmica. Todos os direitos reservados.</p>
 </footer>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Supabase Client -->
+    <script src="JS/supabaseClient.js"></script>
+
+    <script src="JS/login.js"></script>
 
 </body>
 </html>

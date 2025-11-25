@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Disciplinas - SGA</title>
+    <link rel="stylesheet" href="css/meus-cursos.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">SGA - Aluno</div>
+
+      <nav>
+        <a href="home.html">Home</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+
+      <!-- DROPDOWN PERFIL -->
+      <div class="perfil-dropdown">
+        <button class="btn-perfil" id="btn-perfil-aluno">
+          <span id="nome-perfil-aluno">Aluno</span>
+        </button>
+
+        <div class="perfil-menu" id="menu-aluno">
+          <p>
+            <strong><span id="matricula-perfil-aluno"></span></strong>
+          </p>
+          <hr />
+          <a href="painel-aluno.html" class="btn-voltar">Voltar</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="conteudo-disciplinas">
+      <h1>📚 Meus cursos</h1>
+      <div id="lista-disciplinas" class="grade-disciplinas"></div>
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal-disciplina" class="modal">
+      <div class="modal-content modal-lg">
+        <span class="close" id="fechar-modal">&times;</span>
+
+        <h2 id="titulo-modal"></h2>
+        <hr />
+
+        <div class="info-grid">
+          <div>
+            <strong>Professor:</strong>
+            <p id="professor-modal"></p>
+          </div>
+          <div>
+            <strong>Carga Horária:</strong>
+            <p id="carga-modal"></p>
+          </div>
+          <div>
+            <strong>Turma:</strong>
+            <p id="turma-modal"></p>
+          </div>
+        </div>
+
+        <h3>📄 Plano de Ensino / Ementa</h3>
+        <p id="plano-modal" class="plano-texto"></p>
+
+        <button id="btn-ir-painel" class="btn-roxo mt-20">
+          Ir para o Painel
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Sistema Acadêmico — SGA</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="JS/supabaseClient.js"></script>
+    <script src="JS/meus-cursos.js"></script>
+  </body>
+</html>
