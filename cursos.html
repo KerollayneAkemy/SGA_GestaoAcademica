@@ -1,54 +1,51 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cursos - SGA</title>
-  <link rel="stylesheet" href="css/curso.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de Cursos de Tecnologia - SGA</title>
+    <link rel="stylesheet" href="css/curso.css" />
 </head>
+
 <body>
-  <header>
-    <div class="logo">SGA</div>
-    <nav>
-      <a href="home.html">Home</a>
-      <a href="cursos.html" class="active">Cursos</a>
-      <a href="sobre.html">Sobre</a>
-      <a href="contato.html">Contato</a>
-      <a href="login.html" class="btn-login">Login</a>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">SGA</div>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="cursos.html" class="active">Cursos</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+            <a href="login.html" class="btn-login">Login</a>
+        </nav>
+    </header>
 
-  <main>
-    <section class="cursos">
-      <h2>Lista de Cursos</h2>
-      <input type="text" id="filtro" placeholder="Filtrar por semestre ou área">
+    <main>
+        <section class="cursos">
+            <h2>Nossos cursos na área da Tecnologia</h2>
 
-      <div class="curso-list">
-        <div class="curso-card">
-          <h3>Análise e Desenvolvimento de Sistemas</h3>
-          <p>1º Semestre</p>
-          <a href="disciplina.html" class="btn-detalhes">Ver Detalhes</a>
-        </div>
-        <div class="curso-card">
-          <h3>Gestão Financeira</h3>
-          <p>1º Semestre</p>
-          <a href="disciplina.html" class="btn-detalhes">Ver Detalhes</a>
-        </div>
-        <div class="curso-card">
-          <h3>Banco de Dados</h3>
-          <p>1º Semestre</p>
-          <a href="disciplina.html" class="btn-detalhes">Ver Detalhes</a>
-        </div>
-        <div class="curso-card">
-          <h3>Inteligência Artificial</h3>
-          <p>1º Semestre</p>
-          <a href="disciplina.html" class="btn-detalhes">Ver Detalhes</a>
-        </div>
-    </section>
-  </main>
+            <input type="text" id="filtro" placeholder="Pesquisar por área, nome ou professor..." />
 
-  <footer>
-    <p>&copy; 2025 Sistema de Gestão Acadêmica. Todos os direitos reservados.</p>
-  </footer>
+            <div class="curso-list"></div>
+        </section>
+
+        <!-- MODAL -->
+        <div id="course-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3 id="modal-title">Detalhes do Curso</h3>
+                <p id="modal-details-duration"></p>
+                <p id="modal-details-text"></p>
+                <button class="btn-inscrever-modal">Inscrever-se</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sistema de Gestão Acadêmica. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="JS/supabaseClient.js"></script>
+    <script src="JS/curso.js"></script>
 </body>
 </html>

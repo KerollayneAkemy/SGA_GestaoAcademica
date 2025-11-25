@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel do Professor - SGA</title>
+    <link rel="stylesheet" href="css/professor.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">SGA - Professor</div>
+
+      <div class="header-right">
+      <nav>
+        <a href="home.html">Home</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+
+      <div class="perfil-dropdown">
+  <button class="btn-perfil" id="btn-perfil-professor">
+    <span id="nome-perfil-professor">Professor(a)</span>
+  </button>
+
+  <div class="perfil-menu" id="menu-professor">
+    <p>
+      <strong><span id="email-perfil-professor"></span></strong>
+    </p>
+    <hr />
+    <a href="#" class="acao-editar-perfil">⚙️ Editar Perfil</a>
+    <a href="login.html" id="logout-professor">Sair</a>
+  </div>
+</div>
+    </header>
+
+    <main>
+      <section class="painel-container">
+
+        <!-- CARD DE BOAS VINDAS -->
+        <div class="painel-card perfil-card" id="card-boas-vindas">
+          <h2>
+            👋 Bem-vindo(a), 
+            <span id="nome-professor-completo">Professor(a)</span>!
+          </h2>
+
+          <p>
+            E-mail: <span id="email-professor-completo"></span> | Perfil: Docente
+          </p>
+
+          <p>Gerencie seus cursos, lance notas e publique materiais.</p>
+        </div>
+
+        <!-- CURSOS DO PROFESSOR -->
+        <div class="painel-card tabela-card" id="cursos-card">
+          <h2>📚 Meus Cursos</h2>
+          <p>Lista dos cursos vinculados ao seu usuário.</p>
+
+          <div id="lista-cursos-professor">
+            <!-- Cursos do professor aparecem aqui via JS -->
+          </div>
+        </div>
+
+        <!-- LANÇAMENTO DE NOTAS -->
+        <div class="painel-card" id="lancar-notas">
+          <h2>📝 Lançamento de Notas</h2>
+          <p>Selecione o curso e o aluno para lançar notas individuais.</p>
+
+          <form id="form-lancamento" class="form-admin">
+            <select id="cursoSelecionado" required>
+              <option value="">Selecione o Curso</option>
+            </select>
+
+            <select id="alunoSSelecionado" required>
+              <option value="">Selecione o Aluno</option>
+            </select>
+
+            <input type="text" id="tipoAtividade" placeholder="Tipo/Nome da Avaliação" required />
+            <input type="number" id="nota" placeholder="Nota (0.0 a 10.0)" min="0" max="10" step="0.1" required />
+
+            <button type="submit">Lançar Nota</button>
+          </form>
+        </div>
+
+        <!-- HISTÓRICO DE NOTAS -->
+        <div class="painel-card tabela-card">
+          <h2>📉 Histórico de Lançamentos de Notas</h2>
+
+          <table class="tabela-painel" id="tabela-historico-notas">
+            <thead>
+              <tr>
+                <th>Aluno</th>
+                <th>Curso</th>
+                <th>Avaliação</th>
+                <th>Nota</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- MODAL EDITAR PERFIL -->
+    <div id="modal-editar-perfil" class="modal">
+      <div class="modal-content">
+        <span class="close" id="close-professor">&times;</span>
+
+        <h3>⚙️ Editar Perfil do Professor</h3>
+
+        <form id="form-editar-professor">
+          <input type="text" id="edit-professor-nome" placeholder="Novo Nome" required />
+          <input type="email" id="edit-professor-email" placeholder="Novo E-mail" required />
+          <input type="password" id="edit-professor-senha" placeholder="Nova Senha (opcional)" />
+
+          <button type="submit">Salvar Alterações</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="JS/supabaseClient.js"></script>
+    <script src="JS/painel-professor.js"></script>
+
+    <footer>
+      <p>&copy; 2025 Sistema de Gestão Acadêmica — Painel do Professor.</p>
+    </footer>
+  </body>
+</html>

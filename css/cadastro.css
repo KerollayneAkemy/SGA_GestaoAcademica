@@ -4,16 +4,33 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f9f9fb; 
-    color: #333;
-    line-height: 1.6;
+:root {
+    --primary-color: #6A0DAD;
+    --primary-dark: #540a94;
+    --accent-color: #ffe6ff;
+    --background-light: #f9f9fb;
+    --btn-black: #000000;
+    --background-gradient: linear-gradient(90deg, var(--primary-color), #9b4ddb);
+    --text-dark: #333;
+    --text-light: #fff;
+    --border-color: #ddd;
 }
 
+body {
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------------- HEADER --------------------- */
+
 header {
-    background: linear-gradient(90deg, #6A0DAD, #9b4ddb); 
-    color: #fff;
+    background: var(--primary-color);
+    color: var(--text-light);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,138 +43,130 @@ header {
 
 header .logo {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 1px;
 }
 
 header nav a {
     margin: 0 15px;
-    color: #fff;
+    color: var(--text-light);
     font-weight: 500;
     text-decoration: none;
-    transition: color 0.3s ease;
     position: relative;
+    padding-bottom: 5px;
+    transition: 0.3s;
 }
 
-header nav a.active::after,
-header nav a:hover::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #ffe6ff;
-    border-radius: 4px;
+header nav a:hover {
+    color: var(--accent-color);
 }
 
 .btn-login {
-    background: #fff;
-    color: #6A0DAD;
-    padding: 8px 16px;
-    border-radius: 8px;
+    background: var(--btn-black) !important;
+    color: var(--text-light) !important;
+    padding: 8px 18px;
+    border-radius: 20px;
     font-weight: bold;
     transition: all 0.3s;
 }
 .btn-login:hover {
     background: #f3e6ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* --------------------- MAIN --------------------- */
 
-.auth-container {
+main {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
-    padding: 20px;
-    background: linear-gradient(180deg, #fafafa, #f0f0f5);
+    padding: 50px 20px;
 }
 
-
-.auth-card {
+#cadastroForm {
     background: #fff;
-    padding: 40px 30px;
-    border-radius: 18px;
-    max-width: 420px;
+    padding: 40px 35px;
+    border-radius: 15px;
     width: 100%;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.auth-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
-}
-
-
-.auth-card h2 {
-    color: #6A0DAD;
-    font-size: 32px;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
-
-
-.auth-card form {
+    max-width: 420px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     display: flex;
     flex-direction: column;
     gap: 18px;
+    transition: 0.3s;
 }
 
+#cadastroForm:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
 
-.auth-card input {
-    padding: 12px 15px;
+#cadastroForm h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+#cadastroForm input {
+    padding: 14px;
     border-radius: 10px;
-    border: 2px solid #ddd;
+    border: 1px solid var(--border-color);
     font-size: 16px;
     transition: 0.3s;
 }
-.auth-card input:focus {
+
+#cadastroForm input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(106, 13, 173, 0.3);
     outline: none;
-    border-color: #6A0DAD;
-    box-shadow: 0 0 10px rgba(106, 13, 173, 0.25);
 }
 
-
-.auth-card button {
+#cadastroForm button {
+    background: var(--primary-color);
+    color: white;
     padding: 14px;
-    background: #6A0DAD;
-    color: #fff;
-    font-weight: bold;
-    border: none;
     border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease;
-}
-.auth-card button:hover {
-    background: #540a94;
-}
-
-
-.auth-card p {
-    margin-top: 18px;
-    font-size: 14px;
-    color: #555;
-}
-.auth-card p a {
-    color: #6A0DAD;
-    text-decoration: none;
+    border: none;
+    font-size: 18px;
     font-weight: bold;
-    transition: color 0.3s;
-}
-.auth-card p a:hover {
-    color: #540a94;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
+#cadastroForm button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* --------------------- FOOTER --------------------- */
 
 footer {
-    background: #6A0DAD;
-    color: #fff;
+    background: var(--primary-color);
+    color: var(--text-light);
     text-align: center;
     padding: 20px;
-    margin-top: 60px;
     font-weight: 500;
-    letter-spacing: 0.5px;
 }
 
+/* --------------------- RESPONSIVO --------------------- */
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        padding: 15px 5%;
+    }
+
+    header nav {
+        margin-top: 10px;
+    }
+
+    #cadastroForm {
+        padding: 30px 20px;
+    }
+
+    #cadastroForm h2 {
+        font-size: 26px;
+    }
+}
