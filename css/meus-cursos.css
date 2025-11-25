@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f5f4fa;
+    color: #333;
+}
+
+:root {
+    --roxo: #6A0DAD;
+    --roxo-escuro: #4a057a;
+    --roxo-hover: #5b0995;
+    --cinza-linha: #eceaed;
+    --cinza-borda: #ddd;
+    --branco: #ffffff;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+header {
+    background: var(--roxo);
+    color: var(--branco);
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+header .logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+header nav a {
+    margin-left: 15px;
+    color: var(--branco);
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    transition: 0.3s;
+}
+
+header nav a:hover::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #ffceff;
+    bottom: -4px;
+    left: 0;
+}
+
+/* DROPDOWN PERFIL */
+.perfil-dropdown {
+    position: relative;
+}
+
+.btn-perfil {
+    background: transparent;
+    border: 2px solid #ffceff;
+    color: var(--branco);
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-perfil:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.perfil-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 48px;
+    width: 200px;
+    background: var(--branco);
+    color: #333;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    animation: fadeDown 0.25s ease-out;
+}
+
+.perfil-dropdown:focus-within .perfil-menu,
+.perfil-menu.show {
+    display: flex;
+}
+
+.perfil-menu a {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.perfil-menu a:hover {
+    background: var(--cinza-linha);
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* CONTEÚDO PRINCIPAL */
+.conteudo-disciplinas {
+    padding: 40px 5%;
+}
+
+h1 {
+    color: var(--roxo);
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Grade de disciplinas */
+.grade-disciplinas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* CARDS */
+.card-disciplina {
+    background: var(--branco);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.card-disciplina:hover {
+    transform: translateY(-4px);
+}
+
+.card-disciplina h3 {
+    color: var(--roxo);
+    margin-bottom: 8px;
+}
+
+.card-disciplina p {
+    margin-bottom: 6px;
+}
+
+.btn-roxo {
+    background: var(--roxo);
+    color: var(--branco);
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-roxo:hover {
+    background: var(--roxo-hover);
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--branco);
+    padding: 25px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 850px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    animation: fade 0.25s ease-out;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    color: var(--roxo);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close:hover {
+    color: var(--roxo-hover);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 15px 0;
+}
+
+/* TABELA */
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabela th {
+    background: var(--roxo);
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabela td {
+    padding: 12px;
+    border-bottom: 1px solid var(--cinza-borda);
+}
+
+.tabela tr:nth-child(even) {
+    background: var(--cinza-linha);
+}
+
+/* FOOTER */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--roxo);
+    color: var(--branco);
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    z-index: 999;
+}
+

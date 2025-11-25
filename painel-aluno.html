@@ -1,80 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel do Aluno - SGA</title>
-  <link rel="stylesheet" href="css/painel-aluno.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel do Aluno - SGA</title>
 
-  <header>
-    <div class="logo">SGA</div>
-    <nav aria-label="Navegação principal">
-      <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="cursos.html">Cursos</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="contato.html">Contato</a></li>
-        <li><a href="login.html" class="btn-login">Sair</a></li>
-      </ul>
-    </nav>
-  </header>
+    <link rel="stylesheet" href="css/aluno.css" />
+  </head>
 
-  <main>
-    <section class="painel-container">
+  <body>
+    <header>
+      <div class="logo">SGA - Aluno</div>
 
-      <div class="painel-card destaque">
-        <h2>Bem-vindo, João Silva 👋</h2>
-        <p>
-          Aqui você acompanha suas disciplinas, notas e informações importantes do semestre.
-        </p>
-        <a href="#" class="btn-editar-perfil">Editar Perfil</a>
+      <div class="header-right">
+        <nav>
+          <a href="home.html">Home</a>
+          <a href="cursos.html">Cursos</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="contato.html">Contato</a>
+        </nav>
+
+        <div class="perfil-dropdown">
+          <button class="btn-perfil" id="btn-perfil-aluno">
+            <span id="nome-perfil-aluno">Aluno</span>
+          </button>
+
+          <div class="perfil-menu" id="menu-aluno">
+            <p>
+              <strong><span id="matricula-perfil-aluno"></span></strong>
+            </p>
+            <hr />
+
+            <a href="#" class="acao-editar-perfil">⚙️ Editar Perfil</a>
+            <a href="meuscursos.html">🎓 Meus cursos</a>
+            <a href="login.html" id="logout-aluno" class="btn-login-menu">Sair</a>
+          </div>
+        </div>
       </div>
+    </header>
 
-      <!-- Disciplinas -->
-      <div class="painel-card tabela-card">
-        <h3>📚 Disciplinas Matriculadas</h3>
-        <table class="tabela-painel">
-          <thead>
-            <tr>
-              <th scope="col">Disciplina</th>
-              <th scope="col">Professor</th>
-              <th scope="col">Nota</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Engenharia de Software</td>
-              <td>Prof. João</td>
-              <td>9.5</td>
-            </tr>
-            <tr>
-              <td>Banco de Dados</td>
-              <td>Prof. Maria</td>
-              <td>8.7</td>
-            </tr>
-          </tbody>
-        </table>
+    <main>
+      <section class="painel-container">
+        <div class="painel-card perfil-card">
+          <h2>👋 Bem-vindo(a), <span id="nome-aluno-completo">Aluno</span>!</h2>
+          <p>
+            Matrícula: <span id="matricula-aluno-completo"></span>
+          </p>
+        </div>
+
+        <div class="painel-card tabela-card">
+          <h2>📊 Minhas Notas</h2>
+          <table class="tabela-painel" id="tabela-notas">
+            <thead>
+              <tr>
+                <th>Disciplina</th>
+                <th>Atividade</th>
+                <th>Nota</th>
+                <th>Professor</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div id="modal-editar-perfil-aluno" class="modal">
+      <div class="modal-content">
+        <span class="close" id="close-aluno">&times;</span>
+        <h3>⚙️ Editar Perfil</h3>
+
+        <form id="form-editar-aluno">
+          <input type="text" id="edit-aluno-nome" placeholder="Novo Nome" required />
+          <input type="email" id="edit-aluno-email" placeholder="Novo E-mail" required />
+          <button type="submit">Salvar</button>
+        </form>
       </div>
+    </div>
 
-      <!-- Resumo do semestre -->
-      <div class="painel-card info-card">
-        <h3>📊 Resumo do Semestre</h3>
-        <ul>
-          <li><strong>Total de Disciplinas:</strong> 6</li>
-          <li><strong>Média Geral:</strong> 8.9</li>
-          <li><strong>Próxima Avaliação:</strong> 25/09/2025</li>
-        </ul>
-        <button class="btn-primary">Ver Detalhes</button>
-      </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="JS/supabaseClient.js"></script>
+    <script src="JS/painel-aluno.js"></script>
 
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Sistema de Gestão Acadêmica — Todos os direitos reservados.</p>
-  </footer>
-
-</body>
+    <footer>
+      <p>&copy; 2025 Sistema de Gestão Acadêmica — Painel do Aluno</p>
+    </footer>
+  </body>
 </html>
