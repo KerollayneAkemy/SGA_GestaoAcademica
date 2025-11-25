@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel do Aluno - SGA</title>
+<<<<<<< HEAD
 
     <link rel="stylesheet" href="css/aluno.css" />
   </head>
@@ -85,5 +86,101 @@
     <footer>
       <p>&copy; 2025 Sistema de Gestão Acadêmica — Painel do Aluno</p>
     </footer>
+=======
+    <link rel="stylesheet" href="css/painel-aluno.css" />
+    <script src="js/auth.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">SGA</div>
+      <nav aria-label="Navegação principal">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li>
+            <a
+              href="#"
+              onclick="logout(); window.location.href='login.html';"
+              class="btn-login"
+              >Sair</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="painel-container">
+        <div class="painel-card destaque">
+          <h2 id="welcomeMessage">Bem-vindo! 👋</h2>
+          <p>
+            Aqui você acompanha suas disciplinas, notas e informações
+            importantes do semestre.
+          </p>
+          <a href="#" class="btn-editar-perfil">Editar Perfil</a>
+        </div>
+
+        <!-- Disciplinas -->
+        <div class="painel-card tabela-card">
+          <h3>📚 Disciplinas Matriculadas</h3>
+          <table class="tabela-painel">
+            <thead>
+              <tr>
+                <th scope="col">Disciplina</th>
+                <th scope="col">Professor</th>
+                <th scope="col">Nota</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Engenharia de Software</td>
+                <td>Prof. João</td>
+                <td>9.5</td>
+              </tr>
+              <tr>
+                <td>Banco de Dados</td>
+                <td>Prof. Maria</td>
+                <td>8.7</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Resumo do semestre -->
+        <div class="painel-card info-card">
+          <h3>📊 Resumo do Semestre</h3>
+          <ul>
+            <li><strong>Total de Disciplinas:</strong> 6</li>
+            <li><strong>Média Geral:</strong> 8.9</li>
+            <li><strong>Próxima Avaliação:</strong> 25/09/2025</li>
+          </ul>
+          <button class="btn-primary">Ver Detalhes</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Sistema de Gestão Acadêmica — Todos os direitos reservados.
+      </p>
+    </footer>
+
+    <script>
+      if (!isLoggedIn()) {
+        window.location.href = "login.html";
+      } else {
+        const user = getCurrentUser();
+        if (user.type !== "aluno") {
+          window.location.href = "login.html";
+        } else {
+          document.getElementById(
+            "welcomeMessage"
+          ).textContent = `Bem-vindo, ${user.name}! 👋`;
+        }
+      }
+    </script>
+>>>>>>> 8b19a3cfa1131984bd7faf2e2d2f3c05055fcb53
   </body>
 </html>
