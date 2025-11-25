@@ -1,146 +1,410 @@
-* { margin:0; 
-    padding:0; 
-    box-sizing:border-box; }
-    
-body{
-    font-family:'Segoe UI', Arial, sans-serif;
-    background:#f5f5f8;
-    color:#333;
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+:root {
+  --cor-principal:#6A0DAD;
+  --cor-secundaria:#4a057a;
+  --cor-destaque-clara:#FFC0FF;
+  --cor-fundo:#f5f5f8;
+  --cor-texto:#333;
+  --cor-clara:#fff;
+  --cor-sucesso:#4caf50;
+  --cor-perigo:#e53935;
+  --cinza-linha:#f2f2f2;
+  --cinza-borda:#ddd;
 }
 
-header{
-  background:#6A0DAD;
-  color:#fff;
+/* =========================================================
+   BASE
+========================================================= */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:var(--cor-fundo);
+  color:var(--cor-texto);
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+header {
+  background: var(--cor-principal);
+  color: var(--cor-clara);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+header .logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+}
+
+header nav {
+  flex-grow: 1;
+  text-align: center;
+  margin-left: 20px;
+}
+
+header nav a {
+  margin: 0 15px;
+  color: var(--cor-clara);
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+  position: relative;
+}
+
+header nav a:hover::after,
+header nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--cor-destaque-clara);
+}
+
+/* =========================================================
+   DROPDOWN PERFIL
+========================================================= */
+.perfil-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-perfil {
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-perfil:hover { background: #333; }
+
+.perfil-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: var(--cor-clara);
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1001;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+}
+
+.perfil-menu.ativo { display: block; }
+
+.perfil-menu p {
+  color: var(--cor-principal);
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 0.9em;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+}
+
+.perfil-menu a {
+  color: var(--cor-texto);
+  padding: 8px 10px;
+  text-decoration: none;
+  display: block;
+  transition: 0.3s;
+  margin: 5px 0;
+}
+
+.perfil-menu a:hover {
+  background-color: #f2f2f2;
+  color: var(--cor-principal);
+  border-radius: 4px;
+}
+
+.btn-login-menu {
+  background-color: var(--cor-perigo);
+  color: white !important;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.btn-login-menu:hover { background:#c62828; }
+
+
+
+/* =========================================================
+   PAINEL / CARDS
+========================================================= */
+.painel-container {
+  max-width:1200px;
+  margin:0 auto;
+  padding:40px 5%;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 5%;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  flex-direction:column;
+  gap:36px;
 }
-header .logo{
-  font-size:28px;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-header nav a{
-  margin:0 15px;
-  color:#fff;
-  font-weight:500;
-  text-decoration:none;
+
+.painel-card {
+  background:var(--cor-clara);
+  border-radius:20px;
+  padding:30px 25px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
   transition:0.3s;
+}
+
+.painel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.painel-card h2,
+.painel-card h3 {
+  color:var(--cor-principal);
+  margin-bottom:15px;
+}
+
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+.form-admin {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.form-admin input,
+.form-admin select {
+    flex: 1 1 220px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid var(--cor-principal);
+    font-size: 16px;
+}
+
+.form-admin textarea {
+    flex: 1 1 100%;
+    min-height: 90px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid var(--cor-principal);
+    font-size: 16px;
+}
+
+.form-admin button {
+    flex: 1 1 220px;
+    padding: 12px 18px;
+    background: var(--cor-principal);
+    color: var(--cor-clara);
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-admin button:hover {
+    background: var(--cor-secundaria);
+}
+
+
+
+/* =========================================================
+   TABELAS
+========================================================= */
+.tabela-painel {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+  overflow:hidden;
+  border-radius:10px;
+}
+
+.tabela-painel th {
+  background:var(--cor-principal);
+  color:var(--cor-clara);
+  padding:14px;
+}
+
+.tabela-painel td {
+  padding:12px 15px;
+  border-bottom:1px solid #eee;
+}
+
+.tabela-painel tr:nth-child(even){
+  background:var(--cinza-linha);
+}
+
+.tabela-painel tr:hover{
+  background:rgba(106,13,173,0.1);
+}
+
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+.btn-editar,
+.btn-acao,
+.btn-promover {
+  padding:8px 12px;
+  border-radius:8px;
+  border:none;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  margin-right:6px;
+  transition:0.18s;
+  background:var(--cor-sucesso);
+}
+
+.btn-editar:hover,
+.btn-acao:hover,
+.btn-promover:hover {
+  background:#388e3c;
+}
+
+.btn-excluir,
+.btn-excluir-usuario{
+  background:var(--cor-perigo);
+  padding:8px 12px;
+  border-radius:8px;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+  transition:0.18s;
+}
+
+.btn-excluir:hover,
+.btn-excluir-usuario{
+  background:#c62828;
+}
+
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  z-index:2000;
+  overflow:auto;
+  padding:20px;
+}
+
+.modal-content {
+  background:var(--cor-clara);
+  margin:5% auto;
+  padding:20px;
+  border-radius:15px;
+  max-width:520px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
   position:relative;
 }
-header nav a.active::after,
-header nav a:hover::after{
-  content:'';
+
+.close {
   position:absolute;
-  bottom:-5px;
-  left:0;
-  width:100%;
-  height:2px;
-  background:#FFC0FF;
-}
-.btn-login{
-  background:#000;
-  padding:8px 16px;
-  border-radius:6px;
-  font-weight:bold;
-  transition:0.3s;
-}
-.btn-login:hover{background:#333;}
-
-.painel-container{
-    display:flex;
-    flex-direction:column;
-    gap:40px;
-    padding:40px 5%;
-    max-width:1200px;
-    margin:0 auto;
+  top:10px;
+  right:15px;
+  font-size:26px;
+  cursor:pointer;
+  color:var(--cor-texto);
 }
 
-.painel-card{
-    background:#fff;
-    border-radius:20px;
-    padding:30px 25px;
-    box-shadow:0 12px 30px rgba(0,0,0,0.15);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.painel-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 20px 40px rgba(0,0,0,0.2);
-}
-.painel-card h2, .painel-card h3{
-    color:#6A0DAD;
-    margin-bottom:20px;
-}
-.painel-card p{
-    margin-bottom:20px;
-}
 
-.form-admin{
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-bottom:20px;
-}
-.form-admin input{
-    flex:1;
-    padding:12px 15px;
-    border-radius:12px;
-    border:2px solid #6A0DAD;
-    font-size:16px;
-    transition:0.3s;
-}
-.form-admin input:focus{
-    outline:none;
-    border-color:#4a057a;
-    box-shadow:0 0 12px rgba(106,13,173,0.3);
-}
-.form-admin button{
-    padding:12px 20px;
-    background:#6A0DAD;
-    color:#fff;
-    border:none;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-.form-admin button:hover{
-    background:#4a057a;
-}
-
-.tabela-painel{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
-}
-.tabela-painel th, .tabela-painel td{
-    padding:12px 15px;
-    border-bottom:1px solid #ddd;
-    text-align:left;
-}
-.tabela-painel th{
-    background:#6A0DAD;
-    color:#fff;
-}
-.tabela-painel tr:nth-child(even){
-    background:#f2f2f2;
-}
-
+/* =========================================================
+   FOOTER
+========================================================= */
 footer {
-    background: #6A0DAD;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    margin-top: 60px;
+  background:var(--cor-principal);
+  color:var(--cor-clara);
+  text-align:center;
+  padding:20px;
+  margin-top:50px;
 }
 
-/* RESPONSIVO */
-@media(max-width:768px){
-    .form-admin{flex-direction:column;}
-    .form-admin button{width:100%;}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+@media (max-width: 768px) {
+
+  /* Header */
+  header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  header nav {
+    display: none;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  header .logo {
+    font-size: 1.4rem;
+  }
+
+  /* Painel */
+  .painel-container {
+    padding: 20px 4%;
+  }
+
+  /* Tabela responsiva */
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Form */
+  .form-admin input,
+  .form-admin select,
+  .form-admin textarea,
+  .form-admin button {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 90%;
+  }
+
+  /* Botões */
+  .btn-editar,
+  .btn-acao,
+  .btn-excluir {
+    width: 100%;
+    margin-bottom: 8px;
+  }
 }

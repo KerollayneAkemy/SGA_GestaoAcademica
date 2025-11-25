@@ -1,93 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel Administrador - SGA</title>
-<link rel="stylesheet" href="css/painel-admin.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Painel do Administrador - SGA</title>
+    <link rel="stylesheet" href="css/painel-admin.css" />
+  </head>
 
-<header>
-    <div class="logo">SGA</div>
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="cursos.html">Cursos</a>
-        <a href="sobre.html">Sobre</a>
-        <a href="contato.html">Contato</a>
-        <a href="login.html" class="btn-login">Sair</a>
-    </nav>
-</header>
+  <body>
+    <header>
+      <div class="logo">SGA - Admin</div>
 
-<main>
-<section class="painel-container">
-    <div class="painel-card">
-        <h2>Painel do Administrador</h2>
-        <p>Cadastre novos cursos e disciplinas na plataforma</p>
+      <div class="header-right">
+        <nav>
+          <a href="home.html">Home</a>
+          <a href="cursos.html">Cursos</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="contato.html">Contato</a>
+        </nav>
 
-        <form class="form-admin">
-            <input type="text" placeholder="Nome do Curso" required>
-            <input type="text" placeholder="Nome da Disciplina" required>
-            <button type="submit">Cadastrar</button>
+        <div class="perfil-dropdown">
+          <button class="btn-perfil" id="btn-perfil-admin">
+            <span id="nome-perfil-admin">Administrador</span>
+          </button>
+
+          <div class="perfil-menu" id="menu-admin">
+            <p><strong><span id="email-perfil-admin"></span></strong></p>
+            <hr />
+            <a href="#" class="acao-editar-perfil" id="abrir-editar-perfil">⚙️ Editar Perfil</a>
+            <a href="#" id="logout-admin" class="btn-login-menu">Sair</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="painel-container">
+
+        <!-- CADASTRAR CURSO -->
+        <div class="painel-card">
+          <h2>Cadastro de Cursos 🎓</h2>
+
+          <form id="form-admin" class="form-admin">
+            <input type="text" id="curso" placeholder="Nome do Curso" required />
+            <input type="text" id="duracao" placeholder="Duração do Curso" required />
+            <textarea id="descricao" placeholder="Descrição do Curso" rows="4" required></textarea>
+            <select id="select-professor-vinculo" required>
+              <option value="">-- Selecionar Professor --</option>
+            </select>
+            <button type="submit">Cadastrar Curso</button>
+          </form>
+        </div>
+
+        <!-- TABELA DE CURSOS -->
+        <div class="painel-card tabela-card">
+          <h3>Cursos Cadastrados</h3>
+          <table class="tabela-painel" id="tabela-cursos">
+            <thead>
+              <tr>
+                <th>Curso</th>
+                <th>Professor Responsável</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-cursos-corpo"></tbody>
+          </table>
+        </div>
+
+        <!-- TABELA DE PROFESSORES -->
+        <div class="painel-card tabela-card">
+          <h3>Professores Cadastrados</h3>
+          <table class="tabela-painel" id="tabela-professores">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- TABELA DE ALUNOS -->
+        <div class="painel-card tabela-card">
+          <h3>Alunos Cadastrados</h3>
+          <table class="tabela-painel" id="tabela-alunos">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- MENSAGENS -->
+        <div class="painel-card tabela-card">
+          <h3>Mensagens de Contato 📧</h3>
+          <table class="tabela-painel" id="tabela-contatos">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Mensagem</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- MODAL EDITAR CURSO -->
+    <div id="modal-editar-curso" class="modal">
+      <div class="modal-content">
+        <span class="close" id="close-editar-curso">&times;</span>
+
+        <h3>Editar Curso</h3>
+        <form id="form-editar-curso">
+          <input type="hidden" id="edit-curso-id" />
+          <input type="text" id="edit-curso-nome" placeholder="Nome do Curso" required />
+          <input type="text" id="edit-curso-duracao" placeholder="Duração" required />
+          <textarea id="edit-curso-descricao" placeholder="Descrição" rows="4" required></textarea>
+          <select id="edit-curso-professor" required>
+            <option value="">-- Selecionar Professor --</option>
+          </select>
+          <button type="submit">Salvar Alterações</button>
         </form>
+      </div>
     </div>
 
-    <div class="painel-card tabela-card">
-        <h3>Lista de Cursos</h3>
-        <table class="tabela-painel">
-            <thead>
-                <tr>
-                    <th>Curso</th>
-                    <th>Disciplina</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Engenharia de Software</td>
-                    <td>Engenharia de Software I</td>
-                </tr>
-                <tr>
-                    <td>Banco de Dados</td>
-                    <td>Bancos de Dados Avançados</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="painel-card tabela-card">
-        <h3>Formulário de Contatos Recebidos</h3>
-        <table class="tabela-painel">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Mensagem</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Lucas Silva</td>
-                    <td>lucas@email.com</td>
-                    <td>Olá, gostaria de mais informações sobre os cursos.</td>
-                </tr>
-                <tr>
-                    <td>Maria Oliveira</td>
-                    <td>maria@email.com</td>
-                    <td>Como faço para me matricular?</td>
-                </tr>
-                <tr>
-                    <td>João Santos</td>
-                    <td>joao@email.com</td>
-                    <td>Quais disciplinas estão disponíveis para o próximo semestre?</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-</main>
+    <footer>
+      <p>&copy; 2025 Sistema de Gestão Acadêmica — Todos os direitos reservados.</p>
+    </footer>
 
-<footer>
-    <p>&copy; 2025 Sistema de Gestão Acadêmica. Todos os direitos reservados.</p>
-</footer>
-
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="JS/supabaseClient.js"></script>
+    <script type="module" src="JS/painel-admin.js"></script>
+  </body>
 </html>

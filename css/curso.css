@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ======= AJUSTE ESTRUTURAL PARA O FOOTER ======= */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+main {
+    flex: 1;
+}
+
+/* ================= HEADER ================== */
+
+header {
+    background: #6A0DAD;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+header .logo {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s;
+    position: relative;
+}
+
+header nav a.active::after,
+header nav a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #FFC0FF;
+}
+
+.btn-login {
+    background: #000;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background: #333;
+}
+
+/* ================= CONTEÚDO PRINCIPAL (CURSOS) ================== */
+
+.cursos {
+    padding: 80px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cursos h2 {
+    color: #4a057a;
+    font-size: 44px;
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+
+#filtro {
+    padding: 15px 20px;
+    width: 90%;
+    max-width: 550px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    font-size: 17px;
+    margin-bottom: 60px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+#filtro:focus {
+    outline: none;
+    border-color: #6A0DAD;
+    box-shadow: 0 0 10px rgba(106,13,173,0.2);
+}
+
+.curso-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.curso-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+
+    /* 🔥 Deixa o card quadrado */
+    height: 300px;        
+}
+
+
+.curso-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #6A0DAD;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.curso-card h3 {
+    color: #6A0DAD;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.card-duration {
+    font-size: 14px;
+    color: #999;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card-summary {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+/* --- Botões e Ações --- */
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.card-actions button {
+    flex: 1;
+    padding: 12px 10px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+.btn-detalhes {
+    background: linear-gradient(135deg, #7d1fd1, #5a0a9e);
+    color: #fff !important;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(106, 13, 173, 0.3);
+}
+
+.btn-detalhes:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(106, 13, 173, 0.45);
+    background: linear-gradient(135deg, #8b2fe3, #6a0dad);
+}
+
+.btn-detalhes:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(106, 13, 173, 0.25);
+}
+
+.btn-detalhes::after {
+    content: "→";
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+.btn-detalhes:hover::after {
+    transform: translateX(4px);
+}
+
+.btn-inscrever, .btn-inscrever-modal {
+    background: #FFC0FF;
+    color: #6A0DAD;
+    border: 1px solid #6A0DAD;
+}
+
+.btn-inscrever:hover, .btn-inscrever-modal:hover {
+    background: #FF88FF;
+    transform: translateY(-2px);
+}
+
+.curso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    background: #fff;
+}
+
+/* ================= MODAL ================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    padding-top: 70px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 650px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    position: relative;
+    animation: fadeIn 0.4s;
+    text-align: left;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-btn {
+    color: #666;
+    float: right;
+    font-size: 35px;
+    font-weight: normal;
+    transition: color 0.2s;
+}
+
+.close-btn:hover, .close-btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-title {
+    color: #6A0DAD;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+#modal-details-duration {
+    font-weight: bold;
+    color: #4a057a;
+    margin-bottom: 20px;
+    display: block;
+}
+
+#modal-details-text {
+    line-height: 1.8;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.btn-inscrever-modal {
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px;
+    font-size: 18px;
+}
+
+/* ================= FOOTER ================== */
+
+footer {
+    background: #6A0DAD;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-weight: 500;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ================= RESPONSIVO ================== */
+
+@media (max-width: 992px) {
+    .curso-list {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .cursos h2 {
+        font-size: 36px;
+    }
+    #filtro {
+        max-width: 90%;
+    }
+    .card-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        padding: 15px 3%;
+    }
+    header nav a {
+        margin: 0 8px;
+    }
+    .cursos h2 {
+        font-size: 30px;
+    }
+}

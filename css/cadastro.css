@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #6A0DAD;
+    --primary-dark: #540a94;
+    --accent-color: #ffe6ff;
+    --background-light: #f9f9fb;
+    --btn-black: #000000;
+    --background-gradient: linear-gradient(90deg, var(--primary-color), #9b4ddb);
+    --text-dark: #333;
+    --text-light: #fff;
+    --border-color: #ddd;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------------- HEADER --------------------- */
+
+header {
+    background: var(--primary-color);
+    color: var(--text-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: var(--text-light);
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 5px;
+    transition: 0.3s;
+}
+
+header nav a:hover {
+    color: var(--accent-color);
+}
+
+.btn-login {
+    background: var(--btn-black) !important;
+    color: var(--text-light) !important;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.btn-login:hover {
+    background: #f3e6ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --------------------- MAIN --------------------- */
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+#cadastroForm {
+    background: #fff;
+    padding: 40px 35px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: 0.3s;
+}
+
+#cadastroForm:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+#cadastroForm h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+#cadastroForm input {
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+#cadastroForm input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(106, 13, 173, 0.3);
+    outline: none;
+}
+
+#cadastroForm button {
+    background: var(--primary-color);
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#cadastroForm button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* --------------------- FOOTER --------------------- */
+
+footer {
+    background: var(--primary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 20px;
+    font-weight: 500;
+}
+
+/* --------------------- RESPONSIVO --------------------- */
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        padding: 15px 5%;
+    }
+
+    header nav {
+        margin-top: 10px;
+    }
+
+    #cadastroForm {
+        padding: 30px 20px;
+    }
+
+    #cadastroForm h2 {
+        font-size: 26px;
+    }
+}
