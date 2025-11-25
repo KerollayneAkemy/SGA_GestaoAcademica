@@ -1,293 +1,209 @@
+
+:root {
+  --roxo-principal: #6A0DAD;
+  --roxo-escuro: #4a057a;
+  --rosa-claro: #FFC0FF;
+  --cinza-texto: #333;
+  --cinza-secundario: #555;
+  --fundo-claro: #f4f3f8;
+  --preto: #000;
+  --branco: #fff;
+}
+
+/* =======================================
+   RESET / BASE
+======================================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #f4f3f8;
-    color: #333;
-    line-height: 1.6;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--fundo-claro);
+  color: var(--cinza-texto);
+  line-height: 1.7;
 }
 
-/* PALETA */
-:root {
-    --roxo-principal: #6A0DAD;
-    --roxo-escuro: #4a057a;
-    --roxo-hover: #5b0995;
-    --rosa-claro: #FFC0FF;
-
-    --branco: #ffffff;
-    --cinza-texto: #333;
-    --cinza-linha: #f2f2f2;
-    --cinza-borda: #ddd;
-}
+/* =======================================
+   HEADER
+======================================= */
+/* ================= HEADER ================== */
 
 header {
-    background: var(--roxo-principal);
-    color: var(--branco);
+    background: #6A0DAD;
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 5%;
+    padding: 15px 5%;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 header .logo {
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-left: auto;
-}
-
-header nav {
-    flex-grow: 1;
-    text-align: center;
-    margin-left: 20px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
 }
 
 header nav a {
     margin: 0 15px;
-    color: var(--branco);
+    color: #fff;
     font-weight: 500;
     text-decoration: none;
     transition: 0.3s;
     position: relative;
 }
 
-header nav a:hover::after,
-header nav a.active::after {
+header nav a.active::after,
+header nav a:hover::after {
     content: '';
     position: absolute;
     bottom: -5px;
     left: 0;
     width: 100%;
-    height: 2px;
-    background: var(--rosa-claro);
+    height: 3px;
+    background: #FFC0FF;
 }
 
-/* 
-   DROPDOWN
- */
-
-.perfil-dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.btn-perfil {
+.btn-login {
     background: #000;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 10px 20px;
+    border-radius: 20px;
     font-weight: bold;
-    cursor: pointer;
-    border: none;
     transition: 0.3s;
 }
 
-.btn-perfil:hover {
+.btn-login:hover {
     background: #333;
 }
 
-.perfil-menu {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: var(--branco);
-    min-width: 220px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    z-index: 1001;
-    border-radius: 6px;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
+
+/* =======================================
+   CONTATO CONTAINER
+======================================= */
+.contato-container {
+  max-width: 700px;
+  margin: 70px auto;
+  padding: 40px 35px;
+  background: var(--branco);
+  border-radius: 14px;
+  text-align: left; /* 🔥 inputs e textos à esquerda */
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.6s ease;
 }
 
-.perfil-menu.ativo {
-    display: block;
+/* 🔥 TÍTULO CENTRALIZADO */
+.contato-container h2 {
+  color: var(--roxo-principal);
+  font-size: 32px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.perfil-menu p {
-    color: var(--roxo-principal);
-    padding: 5px 10px;
-    margin: 0;
-    font-size: 0.9em;
-    border-bottom: 1px solid #eee;
-    font-weight: 600;
+/* 🔥 DESCRIÇÃO ALINHADA À ESQUERDA */
+.contato-container p {
+  font-size: 16px;
+  color: var(--cinza-secundario);
+  margin-bottom: 28px;
+  max-width: 550px;
 }
 
-.perfil-menu a {
-    color: var(--cinza-texto);
-    padding: 8px 10px;
-    text-decoration: none;
-    display: block;
-    transition: 0.3s;
-    margin: 5px 0;
+/* FORM */
+.form-profissional {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 10px;
 }
 
-.perfil-menu a:hover {
-    background-color: #f2f2f2;
-    color: var(--roxo-principal);
-    border-radius: 4px;
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  font-size: 15px;
 }
 
-.btn-login-menu {
-    background-color: #e53935;
-    color: white !important;
-    text-align: center;
-    border-radius: 4px;
-    margin-top: 10px;
+input, textarea {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 2px solid var(--roxo-principal);
+  background: #fafafa;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
-.btn-login-menu:hover {
-    background-color: #c62828;
+textarea {
+  resize: none;
+  min-height: 130px;
 }
 
-/* 
-   PAINEL
- */
-
-.painel-container {
-    padding: 40px 5%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+/* Mensagens */
+.error-msg {
+  color: #e53935;
+  font-size: 13px;
+  margin-top: 4px;
+  display: none;
 }
 
-.painel-card {
-    background: var(--branco);
-    padding: 30px 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-    transition: 0.3s;
+.success-msg {
+  color: #2ecc71;
+  font-size: 15px;
+  margin-top: 8px;
+  display: none;
+  font-weight: 600;
+  text-align: center; /* 🔥 deixa o "sucesso" bonito também */
 }
 
-.painel-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+/* 🔥 BOTÃO CENTRALIZADO */
+button.btn-submit {
+  padding: 15px 40px;
+  background: var(--roxo-principal);
+  color: var(--branco);
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin: 0 auto; /* 🔥 CENTRALIZA O BOTÃO */
+  display: block;
 }
 
-.painel-card h2 {
-    color: var(--roxo-principal);
-    margin-bottom: 12px;
+button.btn-submit:hover {
+  background: var(--roxo-escuro);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 13, 173, 0.35);
 }
 
-/* 
-   TABELA*/
-
-.tabela-painel {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    overflow: hidden;
-    border-radius: 12px;
-}
-
-.tabela-painel th {
-    background: var(--roxo-principal);
-    color: var(--branco);
-    padding: 14px;
-}
-
-.tabela-painel td {
-    padding: 12px 15px;
-    border-bottom: 1px solid var(--cinza-borda);
-}
-
-.tabela-painel tr:nth-child(even) {
-    background: var(--cinza-linha);
-}
-
-.tabela-painel tr:hover {
-    background: rgba(106, 13, 173, 0.1);
-}
-
-/* 
-   MODAL
- */
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-.modal-content {
-    background: var(--branco);
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: 100%;
-}
-
-.close {
-    font-size: 28px;
-    float: right;
-    cursor: pointer;
-    font-weight: bold;
-    color: var(--roxo-principal);
-}
-
-.close:hover {
-    color: var(--roxo-escuro);
-}
-
-/*    FOOTER */
-
+/* =======================================
+   FOOTER
+======================================= */
 footer {
-    margin-top: 40px;
-    background: var(--roxo-principal);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    border-radius: 20px 20px 0 0;
+  background: var(--roxo-principal);
+  color: var(--branco);
+  text-align: center;
+  padding: 22px;
+  margin-top: 60px;
+  font-size: 15px;
+  box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.12);
 }
 
-/*   RESPONSIVO */
-
-@media(max-width:768px){
-
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    header nav {
-        margin-top: 10px;
-        margin-left: 0;
-        text-align: left;
-    }
-
-    header nav a {
-        display: block;
-        margin: 5px 0;
-    }
-
-    .header-right {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .perfil-dropdown, .btn-perfil {
-        width: 100%;
-    }
+/* =======================================
+   ANIMAÇÃO ENTRADA
+======================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

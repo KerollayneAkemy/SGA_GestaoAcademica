@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cadastro | SGA</title>
   <link rel="stylesheet" href="css/cadastro.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - SGA</title>
-    <link rel="stylesheet" href="css/cadastro.css">
-    <script src="js/auth.js"></script>
 </head>
 <body>
 
@@ -24,32 +19,6 @@
     </nav>
 </header>
 
-<main>
-    <section class="auth-container">
-        <div class="auth-card">
-            <h2>Crie sua conta</h2>
-            <p>Preencha os dados abaixo para começar sua jornada de aprendizado no <strong>SGA</strong>.</p>
-            
-            <form id="form-cadastro">
-                <label for="nome">Nome completo</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
-                
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
-                
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required>
-                
-                <button type="submit">Cadastrar</button>
-                <div id="cadastroMessage" style="margin-top: 10px; display: none;"></div>
-            </form>
-            
-            <p class="redirect-text">
-                Já possui uma conta? <a href="login.html">Acesse aqui</a>
-            </p>
-        </div>
-    </section>
-</main>
 
   <main>
     <form id="cadastroForm">
@@ -65,24 +34,13 @@
     <p>&copy; 2025 Sistema de Gestão Acadêmica. Todos os direitos reservados.</p>
 </footer>
 
-<script>
-document.getElementById('form-cadastro').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const senha = document.getElementById('senha').value;
-    
-    if (register(nome, email, senha)) {
-        document.getElementById('cadastroMessage').innerHTML = '<span style="color: green;">Cadastro realizado com sucesso!</span>';
-        document.getElementById('cadastroMessage').style.display = 'block';
-        setTimeout(() => {
-            window.location.href = 'login.html';
-        }, 2000);
-    } else {
-        document.getElementById('cadastroMessage').innerHTML = '<span style="color: red;">Email já cadastrado!</span>';
-        document.getElementById('cadastroMessage').style.display = 'block';
-    }
-});
-</script>
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Cliente Supabase -->
+  <script src="JS/supabaseClient.js"></script>
+
+  <!-- Script de cadastro -->
+  <script src="JS/cadastro.js"></script>
 </body>
 </html>

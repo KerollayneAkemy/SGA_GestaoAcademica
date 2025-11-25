@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const user = await checkAuthAndRole('aluno', 'login.html');
   if (!user) return;
 
-  //CAPTURAR ELEMENTOS — COM VERIFICAÇÃO
-  const elNomePerfil = document.getElementById('nome-perfil-aluno');
+  // CAPTURAR ELEMENTOS — COM VERIFICAÇÃO
+    const elNomePerfil = document.getElementById('nome-perfil-aluno');
   const elMatriculaPerfil = document.getElementById('matricula-perfil-aluno');
   const elNomeCompleto = document.getElementById('nome-aluno-completo');
   const elMatriculaCompleto = document.getElementById('matricula-aluno-completo');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  // BUSCAR DADOS DO ALUNO
+  //  BUSCAR DADOS DO ALUNO
   const { data: alunoData, error: alunoErr } = await supabase
     .from('usuarios')
     .select('nome, email')
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   elNomeCompleto.innerText = nomeCompleto;
   elMatriculaCompleto.innerText = user.id;
 
-  // BUSCAR CURSO DO ALUNO 
+  // BUSCAR CURSO DO ALUNO — SELECT CORRIGIDO (SEM ERRO 406)
   const { data: matriculaCurso, error: matErr } = await supabase
     .from('matriculas')
     .select(`
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Carrega imediatamente
   carregarNotas();
 
-  // REALTIME 
+  // REALTIME — 100% FUNCIONAL
   try {
     const channel = supabase
       .channel(`public:notas:aluno:${user.id}`)
