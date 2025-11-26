@@ -29,7 +29,6 @@
       <strong><span id="email-perfil-professor"></span></strong>
     </p>
     <hr />
-    <a href="#" class="acao-editar-perfil">⚙️ Editar Perfil</a>
     <a href="login.html" id="logout-professor">Sair</a>
   </div>
 </div>
@@ -104,22 +103,7 @@
       </section>
     </main>
 
-    <!-- MODAL EDITAR PERFIL -->
-    <div id="modal-editar-perfil" class="modal">
-      <div class="modal-content">
-        <span class="close" id="close-professor">&times;</span>
-
-        <h3>⚙️ Editar Perfil do Professor</h3>
-
-        <form id="form-editar-professor">
-          <input type="text" id="edit-professor-nome" placeholder="Novo Nome" required />
-          <input type="email" id="edit-professor-email" placeholder="Novo E-mail" required />
-          <input type="password" id="edit-professor-senha" placeholder="Nova Senha (opcional)" />
-
-          <button type="submit">Salvar Alterações</button>
-        </form>
-      </div>
-    </div>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="JS/supabaseClient.js"></script>
