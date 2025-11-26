@@ -1,0 +1,209 @@
+
+:root {
+  --roxo-principal: #6A0DAD;
+  --roxo-escuro: #4a057a;
+  --rosa-claro: #FFC0FF;
+  --cinza-texto: #333;
+  --cinza-secundario: #555;
+  --fundo-claro: #f4f3f8;
+  --preto: #000;
+  --branco: #fff;
+}
+
+/* =======================================
+   RESET / BASE
+======================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--fundo-claro);
+  color: var(--cinza-texto);
+  line-height: 1.7;
+}
+
+/* =======================================
+   HEADER
+======================================= */
+/* ================= HEADER ================== */
+
+header {
+    background: #6A0DAD;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+header .logo {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s;
+    position: relative;
+}
+
+header nav a.active::after,
+header nav a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #FFC0FF;
+}
+
+.btn-login {
+    background: #000;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background: #333;
+}
+
+
+/* =======================================
+   CONTATO CONTAINER
+======================================= */
+.contato-container {
+  max-width: 700px;
+  margin: 70px auto;
+  padding: 40px 35px;
+  background: var(--branco);
+  border-radius: 14px;
+  text-align: left; /* 🔥 inputs e textos à esquerda */
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.6s ease;
+}
+
+/* 🔥 TÍTULO CENTRALIZADO */
+.contato-container h2 {
+  color: var(--roxo-principal);
+  font-size: 32px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 🔥 DESCRIÇÃO ALINHADA À ESQUERDA */
+.contato-container p {
+  font-size: 16px;
+  color: var(--cinza-secundario);
+  margin-bottom: 28px;
+  max-width: 550px;
+}
+
+/* FORM */
+.form-profissional {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 10px;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  font-size: 15px;
+}
+
+input, textarea {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 2px solid var(--roxo-principal);
+  background: #fafafa;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+  min-height: 130px;
+}
+
+/* Mensagens */
+.error-msg {
+  color: #e53935;
+  font-size: 13px;
+  margin-top: 4px;
+  display: none;
+}
+
+.success-msg {
+  color: #2ecc71;
+  font-size: 15px;
+  margin-top: 8px;
+  display: none;
+  font-weight: 600;
+  text-align: center; /* 🔥 deixa o "sucesso" bonito também */
+}
+
+/* 🔥 BOTÃO CENTRALIZADO */
+button.btn-submit {
+  padding: 15px 40px;
+  background: var(--roxo-principal);
+  color: var(--branco);
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin: 0 auto; /* 🔥 CENTRALIZA O BOTÃO */
+  display: block;
+}
+
+button.btn-submit:hover {
+  background: var(--roxo-escuro);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 13, 173, 0.35);
+}
+
+/* =======================================
+   FOOTER
+======================================= */
+footer {
+  background: var(--roxo-principal);
+  color: var(--branco);
+  text-align: center;
+  padding: 22px;
+  margin-top: 60px;
+  font-size: 15px;
+  box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* =======================================
+   ANIMAÇÃO ENTRADA
+======================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
