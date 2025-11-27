@@ -1,0 +1,217 @@
+-- =========================================================
+-- 0. LIMPEZA GERAL
+-- =========================================================
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+DROP FUNCTION IF EXISTS public.handle_new_user CASCADE;
+DROP FUNCTION IF EXISTS public.is_role CASCADE;
+
+DROP TABLE IF EXISTS public.matriculas CASCADE;
+DROP TABLE IF EXISTS public.notas CASCADE;
+DROP TABLE IF EXISTS public.cursos CASCADE;
+DROP TABLE IF EXISTS public.contatos CASCADE;
+DROP TABLE IF EXISTS public.usuarios CASCADE;
+
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+-- =========================================================
+-- 1. TABELA USUÁRIOS
+-- =========================================================
+CREATE TABLE public.usuarios (
+  id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  nome text NOT NULL,
+  email text UNIQUE NOT NULL,
+  user_role text NOT NULL CHECK (user_role IN ('aluno','professor','admin')),
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE public.usuarios DISABLE ROW LEVEL SECURITY;
+
+-- =========================================================
+-- 2. TABELA CURSOS
+-- =========================================================
+CREATE TABLE public.cursos (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  nome text NOT NULL,
+  duracao text NOT NULL,
+  descricao text NOT NULL,
+  professor_id uuid REFERENCES public.usuarios(id) ON DELETE SET NULL
+);
+ALTER TABLE public.cursos ENABLE ROW LEVEL SECURITY;
+
+-- =========================================================
+-- 3. TABELA NOTAS
+-- =========================================================
+CREATE TABLE public.notas (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  aluno_id uuid NOT NULL REFERENCES public.usuarios(id) ON DELETE CASCADE,
+  curso_id uuid NOT NULL REFERENCES public.cursos(id) ON DELETE CASCADE,
+  atividade text NOT NULL,
+  nota numeric(4,2) CHECK (nota >= 0 AND nota <= 10),
+  data timestamptz DEFAULT now()
+);
+ALTER TABLE public.notas ENABLE ROW LEVEL SECURITY;
+
+-- =========================================================
+-- 4. TABELA MATRÍCULAS
+-- =========================================================
+CREATE TABLE public.matriculas (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  aluno_id uuid NOT NULL REFERENCES public.usuarios(id) ON DELETE CASCADE,
+  curso_id uuid NOT NULL REFERENCES public.cursos(id) ON DELETE CASCADE,
+  data timestamptz DEFAULT now(),
+  CONSTRAINT matriculas_unica UNIQUE (aluno_id, curso_id)
+);
+ALTER TABLE public.matriculas ENABLE ROW LEVEL SECURITY;
+
+-- =========================================================
+-- 5. TABELA CONTATOS
+-- =========================================================
+CREATE TABLE public.contatos (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  nome text NOT NULL,
+  email text NOT NULL,
+  mensagem text NOT NULL,
+  data_envio timestamptz DEFAULT now()
+);
+ALTER TABLE public.contatos DISABLE ROW LEVEL SECURITY;
+
+-- =========================================================
+-- 6. TRIGGER: INSERE NOVO USUÁRIO COMO ALUNO
+-- =========================================================
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  v_nome text;
+BEGIN
+  v_nome := COALESCE(NEW.raw_user_meta_data->>'nome', NEW.email);
+
+  INSERT INTO public.usuarios (id, nome, email, user_role)
+  VALUES (NEW.id, v_nome, NEW.email, 'aluno')
+  ON CONFLICT (id) DO UPDATE
+      SET nome = EXCLUDED.nome,
+          email = EXCLUDED.email,
+          user_role = 'aluno';
+
+  RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_auth_user_created
+AFTER INSERT ON auth.users
+FOR EACH ROW
+EXECUTE FUNCTION public.handle_new_user();
+
+-- =========================================================
+-- 7. FUNÇÃO is_role
+-- =========================================================
+CREATE OR REPLACE FUNCTION public.is_role(p_uid uuid, p_role text)
+RETURNS boolean
+LANGUAGE sql
+SECURITY DEFINER
+AS $$
+ SELECT EXISTS (
+   SELECT 1
+   FROM public.usuarios
+   WHERE id = p_uid AND user_role = p_role
+ );
+$$;
+
+-- =========================================================
+-- 8. POLÍTICAS RLS
+-- =========================================================
+
+-----------------------------
+-- CURSOS
+-----------------------------
+
+-- Todos podem ver cursos
+CREATE POLICY "Cursos - select"
+ON public.cursos
+FOR SELECT
+USING (true);
+
+-- Admin cria
+CREATE POLICY "Cursos - insert admin"
+ON public.cursos
+FOR INSERT
+WITH CHECK (public.is_role(auth.uid(), 'admin'));
+
+-- Admin edita
+CREATE POLICY "Cursos - update admin"
+ON public.cursos
+FOR UPDATE
+USING (public.is_role(auth.uid(), 'admin'))
+WITH CHECK (public.is_role(auth.uid(), 'admin'));
+
+-- Admin exclui
+CREATE POLICY "Cursos - delete admin"
+ON public.cursos
+FOR DELETE
+USING (public.is_role(auth.uid(), 'admin'));
+
+-----------------------------
+-- MATRÍCULAS
+-----------------------------
+CREATE POLICY "Matriculas - aluno select"
+ON public.matriculas
+FOR SELECT USING (aluno_id = auth.uid());
+
+CREATE POLICY "Matriculas - aluno insert"
+ON public.matriculas
+FOR INSERT WITH CHECK (aluno_id = auth.uid());
+
+CREATE POLICY "Matriculas - admin select"
+ON public.matriculas
+FOR SELECT USING (public.is_role(auth.uid(), 'admin'));
+
+CREATE POLICY "Matriculas - professor select"
+ON public.matriculas
+FOR SELECT USING (
+  EXISTS (
+    SELECT 1 FROM public.cursos c
+    WHERE c.id = matriculas.curso_id
+      AND c.professor_id = auth.uid()
+  )
+);
+
+-----------------------------
+-- NOTAS
+-----------------------------
+CREATE POLICY "Notas - aluno select"
+ON public.notas
+FOR SELECT USING (aluno_id = auth.uid());
+
+CREATE POLICY "Notas - admin select"
+ON public.notas
+FOR SELECT USING (public.is_role(auth.uid(), 'admin'));
+
+CREATE POLICY "Notas - professor select"
+ON public.notas
+FOR SELECT USING (
+  EXISTS (
+    SELECT 1 FROM public.cursos c
+    WHERE c.id = notas.curso_id
+      AND c.professor_id = auth.uid()
+  )
+);
+
+CREATE POLICY "Notas - professor insert"
+ON public.notas
+FOR INSERT WITH CHECK (
+  EXISTS (
+    SELECT 1 FROM public.cursos c
+    WHERE c.id = curso_id
+      AND c.professor_id = auth.uid()
+  )
+);
+
+-- =========================================================
+-- 9. CRIA ADMIN PADRÃO
+-- =========================================================
+INSERT INTO public.usuarios (id, nome, email, user_role)
+VALUES ('e838e21d-27b7-413f-b12a-5a72e5288574', 'Administrador', 'admin@teste.com', 'admin')
+ON CONFLICT (id) DO UPDATE SET user_role = 'admin';
+
+
